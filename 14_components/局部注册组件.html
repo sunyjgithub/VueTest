@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="test">
+ <!--报错Unknown custom element: <my-footer> - did you register the component correctly?-->
+  <!--因为没有全局注册这个组件 只是局部注册这个组件-->
+  <!--<my-footer></my-footer>-->
+
+   <my-header>
+
+   </my-header>
+</div>
+
+<div id="test2">
+    <global-component></global-component>
+</div>
+
+
+<div id="test3">
+
+</div>
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+
+
+
+
+  const vm = new Vue({ // 配置对象 options
+    // 配置选项(option)
+    //提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标
+    //如果在实例化时存在这个选项，实例将立即进入编译过程，否则，需要显式调用 vm.$mount() 手动开启编译。
+    el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+    data: {
+      msg: 'atguigu'
+    },
+    components:{
+        'my-header':{
+            //报错 component template should contain exactly one root element
+           /* template:'<div>{{msg}}</div><my-footer></my-footer>',*/
+            template:'<div>{{msg}} <my-footer></my-footer></div>',
+            //报错 The "data" option should be a function that returns a per-instance value in component definitions
+           /* data:{
+                msg:'sss'
+            }*/
+           data(){
+               return{
+                   msg:'this is header'
+               }
+           },
+           components:{
+               'my-footer':{
+                       template:'<div>{{msg}}</div>',
+                       data(){
+                           return{
+                               msg:'this is footer'
+                           }
+                       }
+               }
+           }
+        }
+    }
+  })
+
+  console.log(vm.$el);
+  console.log(document.getElementById("test"));
+
+
+ //Unknown custom element: <global-component> - did you register the component correctly?
+  /**/
+  /*const vm2 = new Vue({
+      el: '#test2',  // element: 指定用vue来管理页面中的哪个标签区域
+      data: {
+          msg: 'atguigu'
+      },
+  });*/
+
+  //Globally registered components can be used in the template of any root Vue instance (new Vue) created afterwards –
+  // and even inside all subcomponents of that Vue instance’s component tree.
+  //全局注册的组件可以在**随后**创建的任何根Vue实例(新Vue)的模板中使用，甚至可以在Vue实例的组件树的所有子组件中使用
+  Vue.component('global-component', {
+      template: '<div>全局组件</div>'
+  })
+/*因为这个全局组件想要在vm2中使用，所以注册必须在new vm2之前进行*/
+  const vm2 = new Vue({
+      el: '#test2',  // element: 指定用vue来管理页面中的哪个标签区域
+      data: {
+          msg: 'atguigu'
+      },
+  });
+
+
+</script>
+</body>
+</html>

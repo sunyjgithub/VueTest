@@ -1,0 +1,19 @@
+AMD规范简单到只有一个API，即define函数：
+
+　　define([module-name?], [array-of-dependencies?], [module-factory-or-object]);
+
+　　其中：
+
+　　module-name: 模块标识，可以省略。
+
+　　array-of-dependencies: 所依赖的模块，可以省略。
+
+　　module-factory-or-object: 模块的实现，或者一个JavaScript对象。
+
+从中可以看到，第一个参数和第二个参数都是可以省略的，第三个参数则是模块的具体实现本身
+
+define 方法允许你省略第一个参数，这样就定义了一个匿名模块，这时候模块文件的文件名就是模块标识。
+如果这个模块文件放在a.js中，那么a就是模块名。可以在依赖项中用"a"来依赖于这个匿名模块。
+这带来一个好处，就是模块是高度可重用的。你拿来一个匿名模块，随便放在一个位置就可以使用它，模块名就是它的文件路径。
+这也很好的符合了DRY（Don't Repeat Yourself）原则。
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="test">
+  <button-counter></button-counter>
+</div>
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+
+    // 组件是可复用的 Vue 实例，且带有一个名字
+    // 定义一个名为 button-counter 的新组件
+    //相当于语法糖功能  一个组件底层一定是去new Vue实例  所以就直接传入一个{}配置对象就行
+    //全局注册
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+  const vm = new Vue({ // 配置对象 options
+    // 配置选项(option)
+    //提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标
+    //如果在实例化时存在这个选项，实例将立即进入编译过程，否则，需要显式调用 vm.$mount() 手动开启编译。
+    el: '#test',  // element: 指定用vue来管理页面中的哪个标签区域
+    data: {
+      msg: 'atguigu'
+    },
+    //模板将会 替换 挂载的元素。挂载元素的内容都将被忽略
+    template:'<div>把我放在里面</div>'
+  })
+
+  console.log(vm.$el);
+  console.log(document.getElementById("test"));
+
+
+
+</script>
+</body>
+</html>

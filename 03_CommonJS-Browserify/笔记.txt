@@ -1,0 +1,14 @@
+Browserify 可以让你使用类似于 node 的 require() 的方式来组织浏览器端的 Javascript 代码，
+通过 预编译 让前端 Javascript 可以直接使用 Node NPM 安装的一些库
+
+
+根据CommonJS规范，一个单独的文件就是一个模块。
+加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的exports对象。
+
+根据这个规范，每一个文件就是一个模块，其内部定义的变量是属于这个模块的，不会对外暴露，也就是说不会污染全局变量。
+
+CommonJS的核心思想就是通过 require 方法来同步加载所要依赖的其他模块，
+然后通过 exports 或者 module.exports 来导出需要暴露的接口。
+
+
+
